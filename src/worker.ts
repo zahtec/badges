@@ -77,14 +77,17 @@ const createBadge = (label: string, message: string, color: string) => {
 
 export default {
 	async fetch(request: Request, env: Env) {
-		const url = request.url.split("/");
-		const color = new URLSearchParams(request.url.split("?")[1]).get("color") || "7610b5";
+		const url = new URL(request.url);
+		const path = url.pathname.split("/").slice(1);
+		const color = url.searchParams.get("color") || "7610b5";
 
-		switch (url[3]) {
+		switch (path[0]) {
 			case "discord":
-				if (!url[4]) return new Response("Please provide a Discord ID", { status: 400 });
+				if (path[1] === "example") return createBadge("Discord", "online", color);
 
-				return fetch(`https://api.lanyard.rest/v1/users/${url[4]}`)
+				if (!path[1]) return new Response("Please provide a Discord ID", { status: 400 });
+
+				return fetch(`https://api.lanyard.rest/v1/users/${path[1]}`)
 					.then((res) => res.json() as Promise<LanyardResponse>)
 					.then((res) =>
 						res.success
@@ -95,20 +98,22 @@ export default {
 					);
 
 			case "views":
-				if (!url[4])
+				if (path[1] === "example") return createBadge("Views", "100", color);
+
+				if (!path[1])
 					return new Response("Please provide a GitHub username", {
 						status: 400,
 					});
 
-				if ((await fetch(`https://github.com/${url[4]}`, { method: "HEAD" })).status === 404)
+				if ((await fetch(`https://github.com/${path[1]}`, { method: "HEAD" })).status === 404)
 					return new Response("GitHub user not found", { status: 404 });
 
-				const views = await env.db.get(url[4]);
+				const views = Number(await env.db.get(path[1]));
 
-				if (views && !isbot(request.headers.get("user-agent"))) env.db.put(url[4], String(Number(views) + 1));
-				else await env.db.put(url[4], "0");
+				if (!isbot(request.headers.get("user-agent"))) env.db.put(path[1], String(views + 1));
 
-				return createBadge("Views", views || "0", color);
+				return createBadge("Views", views.toLocaleString("en-US"), color);
+
 			default:
 				return new Response("Not Found", { status: 404 });
 		}

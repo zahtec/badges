@@ -1,8 +1,11 @@
 # Badges
 
-Cloudflare WebWorker for custom profile README.md badges. All examples use my information.
+Cloudflare WebWorker for custom profile README.md badges.
 
-## Discord Status Badge ![Discord presence](https://badges.zahtec.com/discord/340324858405847042)
+## Discord Status Badge
+
+![Discord presence](https://badges.zahtec.com/discord/example)
+![Discord presence](https://badges.zahtec.com/discord/example?color=1eb323)
 
 Add whether you are online or offline to your profile `README.md`. This makes use of the [Lanyard API](https://github.com/Phineas/lanyard); you must be in their Discord server!
 
@@ -20,7 +23,10 @@ Add whether you are online or offline to your profile `README.md`. This makes us
 
 `id` — Discord user ID
 
-## Profile Views Badge ![Profile views](https://badges.zahtec.com/views/zahtec)
+## Profile Views Badge
+
+![Profile views](https://badges.zahtec.com/views/example)
+![Profile views](https://badges.zahtec.com/views/example?color=1eb323)
 
 Count the amount of users who visit your profile `README.md`.
 
