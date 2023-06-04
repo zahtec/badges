@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"strict": true,
+		"noEmit": true,
+		"lib": ["ESNext"],
+		"target": "ESNext",
+		"module": "ESNext",
+		"skipLibCheck": true,
+		"removeComments": true,
+		"isolatedModules": true,
+		"moduleResolution": "nodenext",
+		"allowSyntheticDefaultImports": true,
+		"types": ["@cloudflare/workers-types"],
+		"forceConsistentCasingInFileNames": true
+	}
+}

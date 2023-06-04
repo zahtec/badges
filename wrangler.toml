@@ -1,0 +1,11 @@
+name = "badges"
+main = "src/worker.ts"
+compatibility_date = "2023-05-18"
+
+routes = [
+	{ pattern = "badges.zahtec.com", custom_domain = true, zone_name = "zahtec.com" }
+]
+
+kv_namespaces = [
+    { binding = "db", id = "1b821b4a247948c69f593336adaad625" }
+]
