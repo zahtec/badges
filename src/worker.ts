@@ -71,7 +71,7 @@ const createBadge = (label: string, message: string, color: string) => {
     </g>
 </svg>
 `.trim(),
-		{ headers: { "Content-Type": "image/svg+xml" } }
+		{ headers: { "Content-Type": "image/svg+xml", "Cache-Control": "no-cache, must-revalidate, no-store" } }
 	);
 };
 
