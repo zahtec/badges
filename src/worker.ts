@@ -1,5 +1,3 @@
-import isbot from "isbot";
-
 export interface Env {
 	db: KVNamespace;
 }
@@ -71,7 +69,7 @@ const createBadge = (label: string, message: string, color: string) => {
     </g>
 </svg>
 `.trim(),
-		{ headers: { "Content-Type": "image/svg+xml", "Cache-Control": "no-cache, must-revalidate, no-store" } }
+		{ headers: { "Content-Type": "image/svg+xml", "Cache-Control": "max-age=0, no-cache, must-revalidate, no-store" } }
 	);
 };
 
@@ -105,12 +103,12 @@ export default {
 						status: 400,
 					});
 
-				if ((await fetch(`https://github.com/${path[1]}`, { method: "HEAD" })).status === 404)
+				if (!(await fetch(`https://github.com/${path[1]}`, { method: "HEAD" })).ok)
 					return new Response("GitHub user not found", { status: 404 });
 
 				const views = Number(await env.db.get(path[1]));
 
-				if (!isbot(request.headers.get("user-agent"))) env.db.put(path[1], String(views + 1));
+				if (request.headers.get("user-agent")?.includes("github-camo")) env.db.put(path[1], String(views + 1));
 
 				return createBadge("Views", views.toLocaleString("en-US"), color);
 
