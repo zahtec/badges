@@ -4,11 +4,11 @@
 		"noEmit": true,
 		"lib": ["ESNext"],
 		"target": "ESNext",
-		"module": "ESNext",
+		"module": "NodeNext",
 		"skipLibCheck": true,
 		"removeComments": true,
 		"isolatedModules": true,
-		"moduleResolution": "nodenext",
+		"moduleResolution": "NodeNext",
 		"allowSyntheticDefaultImports": true,
 		"types": ["@cloudflare/workers-types"],
 		"forceConsistentCasingInFileNames": true

@@ -108,7 +108,7 @@ export default {
 
 				const views = Number(await env.db.get(path[1]));
 
-				if (request.headers.get("user-agent")?.includes("github-camo")) env.db.put(path[1], String(views + 1));
+				if (request.headers.get("user-agent")?.includes("github-camo")) await env.db.put(path[1], String(views + 1));
 
 				return createBadge("Views", views.toLocaleString("en-US"), color);
 

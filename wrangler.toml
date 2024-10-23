@@ -1,11 +1,16 @@
-name = "badges"
-main = "src/worker.ts"
-compatibility_date = "2023-05-18"
+name               = "badges"
+main               = "src/worker.ts"
+compatibility_date = "2024-10-22"
 
 routes = [
-	{ pattern = "badges.zahtec.com", custom_domain = true, zone_name = "zahtec.com" }
+    { pattern = "badges.zahtec.com", custom_domain = true, zone_name = "zahtec.com" },
+    { pattern = "badges.toryn.bio", custom_domain = true, zone_name = "toryn.bio" },
 ]
 
 kv_namespaces = [
-    { binding = "db", id = "1b821b4a247948c69f593336adaad625" }
+    { binding = "db", id = "1b821b4a247948c69f593336adaad625" },
 ]
+
+[observability]
+enabled            = true
+head_sampling_rate = 1
